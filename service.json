@@ -1,0 +1,54 @@
+{
+    "id": "google-reviews",
+    "name": "Google Reviews",
+    "version": "1.0.0",
+    "description": "Hand-curated Google review admin CRUD and homepage social-proof widget model",
+    "author": {
+        "name": "Gavin Cox"
+    },
+    "license": "proprietary",
+
+    "requires": {
+        "osmium": ">=1.0.0",
+        "php": ">=8.1",
+        "services": []
+    },
+
+    "autoload": [
+        "models"
+    ],
+
+    "migrations": "migrations/",
+
+    "admin": {
+        "menu": {
+            "section": "Content",
+            "items": [
+                {
+                    "id": "google-reviews",
+                    "label": "Google Reviews",
+                    "icon": "bx bx-star",
+                    "route": "admin/google-reviews",
+                    "activePattern": "admin/google-reviews*",
+                    "role": "admin"
+                }
+            ]
+        },
+        "routes": {
+            "admin/google-reviews": {
+                "controller": "controllers/GoogleReviewsController.php",
+                "class": "Osmium\\Services\\GoogleReviews\\Controllers\\GoogleReviewsController",
+                "method": "index",
+                "title": "Google Reviews"
+            },
+            "admin/google-reviews/action": {
+                "controller": "controllers/GoogleReviewsController.php",
+                "class": "Osmium\\Services\\GoogleReviews\\Controllers\\GoogleReviewsController",
+                "method": "action"
+            }
+        },
+        "assets": [
+            "assets/google-reviews.js"
+        ]
+    }
+}

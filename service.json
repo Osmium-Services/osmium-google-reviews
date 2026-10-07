@@ -1,7 +1,7 @@
 {
     "id": "google-reviews",
     "name": "Google Reviews",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Hand-curated Google review admin CRUD and homepage social-proof widget model",
     "category": "marketing-analytics",
     "author": {
@@ -47,9 +47,6 @@
                 "class": "Osmium\\Services\\GoogleReviews\\Controllers\\GoogleReviewsController",
                 "method": "action"
             }
-        },
-        "assets": [
-            "assets/google-reviews.js"
-        ]
+        }
     }
 }

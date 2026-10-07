@@ -120,16 +120,16 @@
                 return;
             }
 
-            window.alert(result.error || 'Failed to change visibility');
+            window.adminAlert(result.error || 'Failed to change visibility', 'danger');
         } catch (error) {
-            window.alert('An error occurred while changing visibility');
+            window.adminAlert('An error occurred while changing visibility', 'danger');
         } finally {
             button.disabled = false;
         }
     }
 
     async function handleDelete(id, name) {
-        const confirmed = window.confirm('Delete the review from "' + name + '"?');
+        const confirmed = await window.adminConfirm('Delete the review from "' + name + '"?');
         if (!confirmed) return;
 
         try {
@@ -140,9 +140,9 @@
                 return;
             }
 
-            window.alert(result.error || 'Failed to delete');
+            window.adminAlert(result.error || 'Failed to delete', 'danger');
         } catch (error) {
-            window.alert('An error occurred while deleting');
+            window.adminAlert('An error occurred while deleting', 'danger');
         }
     }
 

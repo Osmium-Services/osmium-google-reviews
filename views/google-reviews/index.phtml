@@ -1,102 +1,26 @@
+<?php
+
+use Osmium\Modules\Admin\Core\ListView;
+
+$listContext = [
+    'adminUrl' => $adminUrl,
+    'isAdmin' => $admin['isAdmin'],
+    'editors' => [],
+    'avatarUrl' => $admin['avatarUrl'] ?? '',
+];
+?>
 <div class="d-flex justify-content-between align-items-center py-3 mb-4">
     <h4 class="mb-0">
-        <span class="text-muted fw-light">Content /</span> Google Reviews
+        Google Reviews
     </h4>
     <button type="button" class="btn btn-primary" id="addReviewButton">
         <i class="bx bx-plus me-1"></i> Add Review
     </button>
 </div>
 
-<div class="card mb-4">
-    <div class="card-header">
-        <h5 class="mb-0">Google Reviews</h5>
-        <span class="badge bg-label-info"><?= \count($admin['reviews']) ?> reviews</span>
-    </div>
-    <div class="card-body">
-        <p class="text-muted small">
-            Reviews are copied by hand from the Google Business Profile
-            dashboard, not scraped. Toggle Featured to control what shows on the
-            homepage widget.
-        </p>
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th style="width: 110px;">Rating</th>
-                        <th>Author</th>
-                        <th>Review</th>
-                        <th style="width: 110px;">Date</th>
-                        <th style="width: 100px;">Featured</th>
-                        <th style="width: 110px;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($admin['reviews'])): ?>
-                        <tr>
-                            <td colspan="6" class="text-center text-muted py-4">
-                                No reviews yet - use Add Review to create one.
-                            </td>
-                        </tr>
-                    <?php else: ?>
-                        <?php foreach ($admin['reviews'] as $review): ?>
-                            <tr>
-                                <td>
-                                    <ul class="star_rating" style="white-space: nowrap; list-style: none; padding: 0; margin: 0;">
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <li style="display: inline;"><i class="fa fa-star<?= $i > $review['rating'] ? '-o' : '' ?>" aria-hidden="true"></i></li>
-                                        <?php endfor; ?>
-                                    </ul>
-                                </td>
-                                <td><strong><?= \htmlspecialchars($review['authorName']) ?></strong></td>
-                                <td>
-                                    <?php
-                                        // strip_tags: the review text editor (Summernote) always
-                                        // wraps saved content in <p> tags, and can carry a <a>
-                                        // product link - this preview column is plain text only.
-                                        $plainReviewText = \strip_tags($review['reviewText']);
-                                        $preview = \mb_strlen($plainReviewText) > 100
-                                            ? \mb_substr($plainReviewText, 0, 100) . '…'
-                                            : $plainReviewText;
-                                    ?>
-                                    <span class="text-muted small"><?= \htmlspecialchars($preview) ?></span>
-                                </td>
-                                <td><?= \htmlspecialchars($review['reviewDate']) ?></td>
-                                <td>
-                                    <button type="button"
-                                        class="badge border-0 toggle-featured <?= $review['isFeatured'] ? 'bg-label-success' : 'bg-label-secondary' ?>"
-                                        data-id="<?= $review['id'] ?>"
-                                        data-featured="<?= $review['isFeatured'] ? '1' : '0' ?>"
-                                        title="Click to toggle">
-                                        <?= $review['isFeatured'] ? 'Featured' : 'Hidden' ?>
-                                    </button>
-                                </td>
-                                <td class="actions-cell">
-                                    <div class="dropdown actions-dropdown">
-                                        <button type="button" class="btn btn-sm btn-icon dropdown-toggle hide-arrow d-flex justify-content-center" data-bs-toggle="dropdown">
-                                            <i class="bx bx-slider" style="font-size: 1.25rem;"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item edit-review" href="#"
-                                                data-review='<?= \htmlspecialchars(\json_encode($review), ENT_QUOTES) ?>'>
-                                                <i class="bx bx-edit-alt me-1"></i> Edit
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item text-danger delete-review" href="#"
-                                                data-id="<?= $review['id'] ?>"
-                                                data-name="<?= \htmlspecialchars($review['authorName']) ?>">
-                                                <i class="bx bx-trash me-1"></i> Delete
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<?= ListView::render($admin['lists']['active'], $admin['reviews'], $listContext) ?>
+<?= ListView::render($admin['lists']['recent'], $admin['recentReviews'], $listContext) ?>
+<?= ListView::render($admin['lists']['deleted'], $admin['deletedReviews'], $listContext) ?>
 
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -163,7 +87,9 @@
 
 <script nonce="<?= $cspNonce ?? '' ?>">
     window.GoogleReviewsConfig = {
-        basePath: adminBasePath
+        basePath: adminBasePath,
+        reviews: <?= \json_encode(\array_column($admin['reviews'], null, 'id'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>
     };
 </script>
+<script src="/assets/admin/js/list-view.js<?= $adminAssetVersion('/assets/admin/js/list-view.js') ?>"></script>
 <script src="/assets/services/google-reviews/google-reviews.js<?= $adminAssetVersion('/assets/services/google-reviews/google-reviews.js') ?>"></script>

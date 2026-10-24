@@ -105,70 +105,15 @@
         }
     }
 
-    async function handleToggleFeatured(button) {
-        button.disabled = true;
-
-        try {
-            const result = await postJson({
-                action: 'toggle_featured',
-                id: button.dataset.id,
-                is_featured: button.dataset.featured !== '1'
-            });
-
-            if (result.success) {
-                window.location.reload();
-                return;
-            }
-
-            window.adminAlert(result.error || 'Failed to change visibility', 'danger');
-        } catch (error) {
-            window.adminAlert('An error occurred while changing visibility', 'danger');
-        } finally {
-            button.disabled = false;
-        }
-    }
-
-    async function handleDelete(id, name) {
-        const confirmed = await window.adminConfirm('Delete the review from "' + name + '"?');
-        if (!confirmed) return;
-
-        try {
-            const result = await postJson({ action: 'delete', id: id });
-
-            if (result.success) {
-                window.location.reload();
-                return;
-            }
-
-            window.adminAlert(result.error || 'Failed to delete', 'danger');
-        } catch (error) {
-            window.adminAlert('An error occurred while deleting', 'danger');
-        }
-    }
-
     function init() {
         document.getElementById('addReviewButton').addEventListener('click', function () {
             openModal(null);
         });
 
-        document.querySelectorAll('.edit-review').forEach(function (link) {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                openModal(JSON.parse(link.dataset.review));
-            });
-        });
-
-        document.querySelectorAll('.delete-review').forEach(function (link) {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                handleDelete(link.dataset.id, link.dataset.name);
-            });
-        });
-
-        document.querySelectorAll('.toggle-featured').forEach(function (button) {
-            button.addEventListener('click', function () {
-                handleToggleFeatured(button);
-            });
+        // Row actions come from the ListView; Edit fires list:action with the row's id
+        document.addEventListener('list:action', function (e) {
+            if (e.detail.action !== 'edit') return;
+            openModal(config.reviews[e.detail.id]);
         });
 
         document.getElementById('reviewForm').addEventListener('submit', handleSubmit);

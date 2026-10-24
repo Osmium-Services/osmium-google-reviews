@@ -54,6 +54,18 @@ class GoogleReview extends Model
         return $result ?: null;
     }
 
+    /**
+     * Like getById() but also finds soft-deleted reviews, for restore and permanent delete
+     */
+    public function getAnyById(int $id): ?array
+    {
+        $this->database->query($this->loadSqlFile('google-review-get-any.sql'));
+        $this->database->bind(param: ':id', value: $id);
+        $result = $this->database->single();
+
+        return $result ?: null;
+    }
+
     public function create(
         string $authorName,
         int $rating,
@@ -119,6 +131,48 @@ class GoogleReview extends Model
         $this->database->query($sql);
         $this->database->bind(param: ':id', value: $id);
         $this->database->execute();
+    }
+
+    /**
+     * Created, changed or deleted in the last 24 hours, newest first, capped at 10
+     */
+    public function listRecent(): array
+    {
+        $this->database->query($this->loadSqlFile('google-review-list-recent.sql'));
+
+        return $this->database->resultset();
+    }
+
+    public function listDeleted(): array
+    {
+        $this->database->query($this->loadSqlFile('google-review-list-deleted.sql'));
+
+        return $this->database->resultset();
+    }
+
+    public function restore(int $id): void
+    {
+        $this->database->query($this->loadSqlFile('google-review-restore.sql'));
+        $this->database->bind(param: ':id', value: $id);
+        $this->database->execute();
+    }
+
+    public function hardDelete(int $id): void
+    {
+        $this->database->query($this->loadSqlFile('google-review-hard-delete.sql'));
+        $this->database->bind(param: ':id', value: $id);
+        $this->database->execute();
+    }
+
+    /**
+     * @return int How many reviews were removed
+     */
+    public function purgeDeleted(): int
+    {
+        $this->database->query($this->loadSqlFile('google-review-purge-deleted.sql'));
+        $this->database->execute();
+
+        return $this->database->rowCount();
     }
 
     private function bindDetails(

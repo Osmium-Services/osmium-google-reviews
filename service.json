@@ -1,7 +1,7 @@
 {
     "id": "google-reviews",
     "name": "Google Reviews",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Hand-curated Google review admin CRUD and homepage social-proof widget model",
     "category": "marketing-analytics",
     "author": {

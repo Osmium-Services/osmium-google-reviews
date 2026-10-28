@@ -20,7 +20,6 @@ return [
         'endpoint' => 'google-reviews/action/',
         'note' => 'Reviews are copied by hand from the Google Business Profile dashboard, not scraped. Featured reviews show on the homepage widget.',
         'emptyText' => 'No reviews yet - use Add Review to create one.',
-        'datatable' => false,
         'order' => null, // Server order: featured first, then display order
         'columns' => [
             ['key' => 'ratingStars', 'label' => 'Rating', 'type' => 'raw', 'nowrap' => true],
@@ -60,7 +59,6 @@ return [
         'icon' => 'bx-time-five',
         'rowClass' => static fn(array $row): string => empty($row['deleted_at']) ? '' : 'table-danger',
         'endpoint' => 'google-reviews/action/',
-        'datatable' => false,
         'collapsible' => ['label' => 'Recent Changes ({count})'],
         'hideWhenEmpty' => false,
         'columns' => [

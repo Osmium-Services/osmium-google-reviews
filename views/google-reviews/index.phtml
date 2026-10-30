@@ -13,9 +13,14 @@ $listContext = [
     <h4 class="mb-0">
         <img src="/assets/services/google-reviews/logo.png" alt="" width="28" height="28" class="me-2 align-text-bottom">Google Reviews
     </h4>
-    <button type="button" class="btn btn-primary" id="addReviewButton">
-        <i class="bx bx-plus me-1"></i> Add Review
-    </button>
+    <div>
+        <a href="<?= $admin['basePath'] ?>settings/google-reviews/" class="btn btn-outline-secondary me-2">
+            <i class="bx bx-cog me-1"></i> Settings
+        </a>
+        <button type="button" class="btn btn-primary" id="addReviewButton">
+            <i class="bx bx-plus me-1"></i> Add Review
+        </button>
+    </div>
 </div>
 
 <?= ListView::render($admin['lists']['active'], $admin['reviews'], $listContext) ?>

@@ -1,7 +1,7 @@
 {
     "id": "google-reviews",
     "name": "Google Reviews",
-    "version": "1.1.5",
+    "version": "1.2.0",
     "description": "Hand-curated Google review admin CRUD and homepage social-proof widget model",
     "category": "marketing-analytics",
     "website": "https://business.google.com",
@@ -42,6 +42,12 @@
                 "class": "Osmium\\Services\\GoogleReviews\\Controllers\\GoogleReviewsController",
                 "method": "index",
                 "title": "Google Reviews"
+            },
+            "admin/settings/google-reviews": {
+                "controller": "controllers/GoogleReviewsSettingsController.php",
+                "class": "Osmium\\Services\\GoogleReviews\\Controllers\\GoogleReviewsSettingsController",
+                "method": "index",
+                "title": "Google Reviews Settings"
             },
             "admin/google-reviews/action": {
                 "controller": "controllers/GoogleReviewsController.php",

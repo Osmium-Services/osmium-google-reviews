@@ -1,7 +1,7 @@
 {
     "id": "google-reviews",
     "name": "Google Reviews",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Hand-curated Google review admin CRUD and homepage social-proof widget model",
     "category": "marketing-analytics",
     "website": "https://business.google.com",
@@ -29,9 +29,10 @@
                 {
                     "id": "google-reviews",
                     "label": "Google Reviews",
-                    "icon": "bx bx-star",
+                    "icon": "bx bxs-star",
                     "route": "admin/google-reviews",
                     "activePattern": "admin/google-reviews*",
+                    "color": "#f4b400",
                     "placement": "top",
                     "role": null
                 }

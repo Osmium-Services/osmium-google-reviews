@@ -14,9 +14,11 @@ $listContext = [
         <img src="/assets/services/google-reviews/logo.png" alt="" width="28" height="28" class="me-2 align-text-bottom">Google Reviews
     </h4>
     <div>
+        <?php if ($admin['isAdmin']): ?>
         <a href="<?= $admin['basePath'] ?>settings/google-reviews/" class="btn btn-outline-secondary me-2">
             <i class="bx bx-cog me-1"></i> Settings
         </a>
+        <?php endif; ?>
         <button type="button" class="btn btn-primary" id="addReviewButton">
             <i class="bx bx-plus me-1"></i> Add Review
         </button>

@@ -21,12 +21,13 @@ return [
         'note' => 'Reviews are copied by hand from the Google Business Profile dashboard, not scraped. Featured reviews show on the homepage widget.',
         'emptyText' => 'No reviews yet - use Add Review to create one.',
         'order' => null, // Server order: featured first, then display order
+        'grid' => require __DIR__ . '/../grids/google-reviews.php',
         'columns' => [
             ['key' => 'ratingStars', 'label' => 'Rating', 'type' => 'raw', 'nowrap' => true],
             ['key' => 'authorName', 'label' => 'Author', 'type' => 'text', 'strong' => true],
             ['key' => 'reviewPreview', 'label' => 'Review', 'type' => 'text', 'small' => true, 'fill' => true],
-            ['key' => 'reviewDate', 'label' => 'Date', 'type' => 'text', 'nowrap' => true],
-            ['key' => 'featuredBadge', 'label' => 'Featured', 'type' => 'raw'],
+            ['key' => 'reviewDate', 'label' => 'Date', 'type' => 'text', 'nowrap' => true, 'hideBelow' => 'md'],
+            ['key' => 'featuredBadge', 'label' => 'Featured', 'type' => 'raw', 'hideBelow' => 'md'],
         ],
         'actions' => [
             ['label' => 'Edit', 'icon' => 'bx-edit-alt', 'event' => 'edit'],

@@ -6,6 +6,7 @@ namespace Osmium\Services\GoogleReviews\Controllers;
 
 use Osmium\Modules\Admin\Core\AdminController;
 use Osmium\Services\GoogleReviews\Models\GoogleReview;
+use Osmium\Services\GoogleReviews\Models\ReviewHtml;
 
 /**
  * Google Reviews controller - manages the reviews behind a homepage
@@ -203,7 +204,7 @@ class GoogleReviewsController extends AdminController
         $ratingOutOfRange = $rating < 1 || $rating > 5;
         if ($ratingOutOfRange) throw new \InvalidArgumentException('Rating must be between 1 and 5');
 
-        $reviewText = \trim($input['review_text'] ?? '');
+        $reviewText = ReviewHtml::sanitize(\trim($input['review_text'] ?? ''));
         $sortOrder = (int) ($input['sort_order'] ?? 0);
 
         return [

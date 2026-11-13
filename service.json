@@ -20,6 +20,15 @@
         "models"
     ],
 
+    "hooks": {
+        "adminbar.context": [
+            "Osmium\\Services\\GoogleReviews\\Models\\ReviewsAdminBar::context"
+        ],
+        "adminbar.links": [
+            "Osmium\\Services\\GoogleReviews\\Models\\ReviewsAdminBar::links"
+        ]
+    },
+
     "migrations": "migrations/",
 
     "admin": {

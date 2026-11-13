@@ -14,6 +14,20 @@ use Osmium\Core\Models\Model;
  */
 class GoogleReview extends Model
 {
+    private static bool $featuredShown = false;
+
+    /** Whether this request asked for the featured reviews, which is how a theme shows the widget. */
+    public static function featuredWereShown(): bool
+    {
+        return self::$featuredShown;
+    }
+
+    /** For tests: forget that the featured reviews were asked for. */
+    public static function forgetShown(): void
+    {
+        self::$featuredShown = false;
+    }
+
     protected ?string $sqlDir = __DIR__ . '/sql';
 
     public function __construct(OsmiumPDO $database)
@@ -37,6 +51,8 @@ class GoogleReview extends Model
      */
     public function listFeatured(int $limit): array
     {
+        self::$featuredShown = true; // For the staff bar's "Google reviews" icon
+
         $sql = $this->loadSqlFile('google-review-list-featured.sql');
         $this->database->query($sql);
         $this->database->bind(param: ':limit', value: $limit);

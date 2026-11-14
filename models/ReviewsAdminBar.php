@@ -31,6 +31,6 @@ class ReviewsAdminBar
         $isContext = ($payload['context'] ?? '') === 'google-reviews:featured';
         if (!$isContext) return null;
 
-        return [['label' => 'Google reviews', 'icon' => 'bxs-star', 'path' => 'google-reviews/', 'primary' => true, 'order' => 80]];
+        return [['label' => 'Edit Google reviews', 'icon' => 'bxs-star', 'path' => 'google-reviews/', 'primary' => true, 'order' => 80]];
     }
 }

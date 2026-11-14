@@ -38,7 +38,7 @@ final class ReviewsAdminBarTest extends TestCase
         $links = ReviewsAdminBar::links(['context' => 'google-reviews:featured']);
 
         $this->assertSame('google-reviews/', $links[0]['path']);
-        $this->assertSame('Google reviews', $links[0]['label']);
+        $this->assertSame('Edit Google reviews', $links[0]['label']);
         $this->assertSame('bxs-star', $links[0]['icon']);
         $this->assertSame(80, $links[0]['order']);
     }

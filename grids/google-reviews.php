@@ -23,13 +23,13 @@ return [
     'actions' => [
         ['label' => 'Edit', 'icon' => 'bx-edit-alt', 'event' => 'edit'],
         [
-            'label' => 'Feature on homepage',
+            'label' => 'Feature',
             'icon' => 'bx-show',
             'action' => 'feature',
             'visible' => fn(array $row, array $context): bool => !$row['isFeatured'],
         ],
         [
-            'label' => 'Hide from homepage',
+            'label' => 'Hide',
             'icon' => 'bx-hide',
             'action' => 'unfeature',
             'visible' => fn(array $row, array $context): bool => (bool) $row['isFeatured'],

@@ -18,7 +18,7 @@ return [
         'title' => 'Google Reviews',
         'noun' => ['review', 'reviews'],
         'endpoint' => 'google-reviews/action/',
-        'note' => 'Reviews are copied by hand from the Google Business Profile dashboard, not scraped. Featured reviews show on the homepage widget.',
+        'note' => 'Reviews are copied by hand from the Google Business Profile dashboard, not scraped. Featured reviews are shown on the site.',
         'emptyText' => 'No reviews yet - use Add Review to create one.',
         'order' => null, // Server order: featured first, then display order
         'grid' => require __DIR__ . '/../grids/google-reviews.php',
@@ -32,13 +32,13 @@ return [
         'actions' => [
             ['label' => 'Edit', 'icon' => 'bx-edit-alt', 'event' => 'edit'],
             [
-                'label' => 'Feature on homepage',
+                'label' => 'Feature',
                 'icon' => 'bx-show',
                 'action' => 'feature',
                 'visible' => fn(array $row, array $context): bool => !$row['isFeatured'],
             ],
             [
-                'label' => 'Hide from homepage',
+                'label' => 'Hide',
                 'icon' => 'bx-hide',
                 'action' => 'unfeature',
                 'visible' => fn(array $row, array $context): bool => (bool) $row['isFeatured'],

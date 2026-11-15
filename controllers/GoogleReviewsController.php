@@ -9,7 +9,7 @@ use Osmium\Services\GoogleReviews\Models\GoogleReview;
 use Osmium\Services\GoogleReviews\Models\ReviewHtml;
 
 /**
- * Google Reviews controller - manages the reviews behind a homepage
+ * Google Reviews controller - manages the reviews behind a
  * social-proof widget.
  *
  * Reviews are copied by hand from the site's Google Business Profile

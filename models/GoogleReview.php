@@ -10,7 +10,7 @@ use Osmium\Core\Models\Model;
 /**
  * Reviews copied by hand from the site's Google Business Profile - not
  * scraped (violates Google's ToS) and not pulled via the Places API (needs a
- * billing-enabled Google Cloud project). Power a homepage social-proof widget.
+ * billing-enabled Google Cloud project). Power a social-proof widget.
  */
 class GoogleReview extends Model
 {
@@ -47,7 +47,7 @@ class GoogleReview extends Model
     }
 
     /**
-     * List featured reviews for the homepage widget, in display order
+     * List featured reviews for the featured reviews widget, in display order
      */
     public function listFeatured(int $limit): array
     {

@@ -131,7 +131,7 @@ class GoogleReviewsController extends AdminController
 
         $model->toggleFeatured(id: $id, isFeatured: $isFeatured);
 
-        $this->logChange(action: $isFeatured ? 'Featured' : 'Unfeatured', id: $id, name: $review['author_name']);
+        $this->logChange(action: $isFeatured ? 'Shown' : 'Hidden', id: $id, name: $review['author_name']);
 
         return ['success' => true, 'id' => $id];
     }
@@ -230,7 +230,7 @@ class GoogleReviewsController extends AdminController
             'reviewPreview' => $this->preview((string) ($row['review_text'] ?? '')),
             'ratingStars' => $this->stars((int) $row['rating']),
             'featuredBadge' => (bool) $row['is_featured']
-                ? '<span class="badge bg-label-success">Featured</span>'
+                ? '<span class="badge bg-label-success">Shown</span>'
                 : '<span class="badge bg-label-secondary">Hidden</span>',
         ];
     }

@@ -23,7 +23,7 @@ return [
     'actions' => [
         ['label' => 'Edit', 'icon' => 'bx-edit-alt', 'event' => 'edit'],
         [
-            'label' => 'Feature',
+            'label' => 'Show',
             'icon' => 'bx-show',
             'action' => 'feature',
             'visible' => fn(array $row, array $context): bool => !$row['isFeatured'],

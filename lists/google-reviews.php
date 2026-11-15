@@ -18,7 +18,7 @@ return [
         'title' => 'Google Reviews',
         'noun' => ['review', 'reviews'],
         'endpoint' => 'google-reviews/action/',
-        'note' => 'Reviews are copied by hand from the Google Business Profile dashboard, not scraped. Featured reviews are shown on the site.',
+        'note' => 'Reviews are copied by hand from the Google Business Profile dashboard, not scraped. Reviews set to Show appear on the site.',
         'emptyText' => 'No reviews yet - use Add Review to create one.',
         'order' => null, // Server order: featured first, then display order
         'grid' => require __DIR__ . '/../grids/google-reviews.php',
@@ -27,12 +27,12 @@ return [
             ['key' => 'authorName', 'label' => 'Author', 'type' => 'text', 'strong' => true],
             ['key' => 'reviewPreview', 'label' => 'Review', 'type' => 'text', 'small' => true, 'fill' => true],
             ['key' => 'reviewDate', 'label' => 'Date', 'type' => 'text', 'nowrap' => true, 'hideBelow' => 'md'],
-            ['key' => 'featuredBadge', 'label' => 'Featured', 'type' => 'raw', 'hideBelow' => 'md'],
+            ['key' => 'featuredBadge', 'label' => 'Visibility', 'type' => 'raw', 'hideBelow' => 'md'],
         ],
         'actions' => [
             ['label' => 'Edit', 'icon' => 'bx-edit-alt', 'event' => 'edit'],
             [
-                'label' => 'Feature',
+                'label' => 'Show',
                 'icon' => 'bx-show',
                 'action' => 'feature',
                 'visible' => fn(array $row, array $context): bool => !$row['isFeatured'],

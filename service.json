@@ -1,8 +1,8 @@
 {
     "id": "google-reviews",
     "name": "Google Reviews",
-    "version": "1.3.3",
-    "description": "Hand-curated Google review admin CRUD and featured reviews (social-proof) model",
+    "version": "1.3.4",
+    "description": "Hand-curated Google review admin CRUD and shown reviews (social-proof) model",
     "category": "marketing-analytics",
     "website": "https://business.google.com",
     "author": {

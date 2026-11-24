@@ -1,6 +1,7 @@
 ---
 title: Add Google reviews to your site
 tags: google reviews, reviews, testimonials, stars, rating, social proof, review link
+page: admin/google-reviews, admin/settings/google-reviews
 ---
 
 **Google Reviews** shows reviews you choose on your site. You add them by hand, so only the ones you want to show appear.
